@@ -7,7 +7,7 @@
   width: 800px;
   height: 600px;
   margin: 0 auto;
-  background-image: url('../../public/demo.png');
+  background-image: url('../assets/demo.png');
   position: relative;
 }
 

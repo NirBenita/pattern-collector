@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Header } from './header'
 import { Mockup } from './content'
 import style from './app.st.css'
+import 'whatwg-fetch';
 
 const mockPatterns: Array<IPattern> = [
   {
@@ -30,3 +31,4 @@ export const App: React.SFC<{ className?: string }> = props => (
     <Mockup patterns={mockPatterns} mainFile="src/index.tsx" />
   </div>
 )
+

@@ -12,8 +12,8 @@ interface PatternProps {
   pattern: IPattern
 }
 
-const Pattern: React.SFC<PatternProps> = ({ pattern }) => {
-  const { width, height, top, left } = pattern.coordinates
+const Pattern: React.SFC<PatternProps> = (props) => {
+  const { width, height, top, left } = props.pattern.coordinates
 
   return (
     <div
@@ -26,23 +26,43 @@ const Pattern: React.SFC<PatternProps> = ({ pattern }) => {
         backgroundImage: "url('../../public/demo.png')"
       }}
     >
-      {pattern.tags
-        ? pattern.tags.map((tag, index) => (
-            <span>
-              {tag.name}, {tag.count}
-            </span>
-          ))
+      {props.pattern.tags
+        ? props.pattern.tags.map((tag: ITag, index: number) => (
+          <span key={index}>
+            {tag.name}, {tag.count}
+          </span>
+        ))
         : null}
     </div>
   )
 }
 
-export const Mockup = (props: MockupProps) => (
-  <div {...style('root', {}, props)}>
-    <div className={style.mockUp}>
-      {props.patterns.map((pattern: IPattern, index) => (
-        <Pattern pattern={pattern} />
-      ))}
-    </div>
-  </div>
-)
+
+
+export class Mockup extends React.Component<MockupProps, {}> {
+  componentWillMount() {
+    fetch('http://localhost:3000/', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    }).then(resp => resp.json())
+      .then(resp => {
+        // const records = records;
+        // console.log(resp);
+        console.log("yo");
+      });
+  }
+
+  public render() {
+    return (
+      <div {...style('root', {}, this.props)}>
+        <div className={style.mockUp}>
+          {this.props.patterns.map((pattern: IPattern, index) => (
+            <Pattern pattern={pattern} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+}

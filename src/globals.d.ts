@@ -50,3 +50,8 @@ interface IPattern {
     coordinates: Coordinates
     tags?: Array<{name:string, count:number}>
   }
+
+  interface ITag {
+    name:string
+    count:number
+  }
