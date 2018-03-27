@@ -41,7 +41,7 @@ const Pattern: React.SFC<PatternProps> = (props) => {
 
 export class Mockup extends React.Component<MockupProps, {}> {
   componentWillMount() {
-    fetch('http://localhost:3000/', {
+    fetch('http://localhost:8080/', {
       headers: {
         'Content-Type': 'application/json'
       },

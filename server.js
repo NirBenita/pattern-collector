@@ -12,13 +12,16 @@ app.delete('*', cors(), function (req, res, next) {
   res.json({ msg: 'This is CORS-enabled for all origins!' })
 })
 
-app.use('/', cors(), express.static('public'));
+app.use('/', express.static('public'));
 
-app.listen(3000, () => { console.log('CORS-enabled web server enabled') });
+app.listen(process.env.port || 8080, function () {
+  console.log('CORS-enabled web server enabled on :' + process.env.port || '8080')
+});
 
 app.get('/get', bodyParser.json(), async (req, res) => {
   const key = 'keyAiGG9bz8R0pvHz';
-  var resp = await fetch('https://api.airtable.com/appjLxW4tV6xza5Dd/main', {
+  var url = 'https://api.airtable.com/v0/tblrYRehWyE727Lpx/viwSmCoXxnkupjHVL';
+  var resp = await fetch(url, {
     headers: {
       "Authorization": "Bearer: " + key
     }
